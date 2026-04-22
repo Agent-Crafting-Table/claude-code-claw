@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  agent:
+    build: .
+    container_name: claude-code-agent
+    restart: unless-stopped
+    env_file:
+      - config/.env
+    volumes:
+      - ./:/workspace
+      - ./config/claude.json:/root/.claude.json
+    environment:
+      - WORKSPACE_DIR=/workspace
+      - XDG_CONFIG_HOME=/workspace/.config
+      - XDG_CACHE_HOME=/workspace/.cache

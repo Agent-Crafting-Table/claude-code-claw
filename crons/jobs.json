@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "daily-status-001",
+      "name": "Daily Status Check",
+      "enabled": false,
+      "schedule": "0 9 * * *",
+      "tz": "UTC",
+      "timeoutSeconds": 120,
+      "model": "sonnet",
+      "message": "Run a brief daily status check. Report: (1) any errors or warnings from recent logs if accessible, (2) a one-line summary of system health. Post the result to Discord using node /workspace/scripts/discord-post.js <YOUR_CHANNEL_ID> \"<message>\". Reply HEARTBEAT_OK when done."
+    },
+    {
+      "id": "weekly-summary-001",
+      "name": "Weekly Summary",
+      "enabled": false,
+      "schedule": "0 10 * * 1",
+      "tz": "UTC",
+      "timeoutSeconds": 180,
+      "model": "sonnet",
+      "message": "Write a brief weekly summary based on memory/active-threads.md and any recent daily notes. Keep it under 200 words. Post to Discord using node /workspace/scripts/discord-post.js <YOUR_CHANNEL_ID> \"<message>\". Reply HEARTBEAT_OK when done."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "claude-code-claw",
+  "version": "1.0.0",
+  "description": "Personal AI ops agent starter kit — Claude Code edition",
+  "private": true,
+  "scripts": {
+    "start": "node scripts/cron-runner.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "node-cron": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

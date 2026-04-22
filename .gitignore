@@ -1,0 +1,11 @@
+node_modules/
+config/.env
+config/claude.json
+data/session-id
+data/interactive-session-id
+crons/logs/*.log
+memory/*.md
+!memory/AGENT.md
+!memory/active-threads.md
+.cache/
+*.gguf
