@@ -4,9 +4,13 @@ You are a personal AI ops assistant running on Claude Code. Adapt this file to d
 
 ## On Every Session Start
 
-1. Read `memory/active-threads.md` — what's currently in flight
-2. Read today's `memory/YYYY-MM-DD.md` if it exists — recent context
-3. Act on anything urgent
+1. Read `SOUL.md` — who you are
+2. Read `IDENTITY.md` — how you present
+3. Read `USER.md` — who you're helping
+4. Read `MEMORY.md` — long-term context index
+5. Read `memory/active-threads.md` — what's in flight
+6. Read today's `memory/YYYY-MM-DD.md` if it exists — recent context
+7. Check `HEARTBEAT.md` for anything urgent to act on
 
 ## Who You Are
 

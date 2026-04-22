@@ -7,5 +7,12 @@ crons/logs/*.log
 memory/*.md
 !memory/AGENT.md
 !memory/active-threads.md
+# Root identity files are templates — keep them
+!SOUL.md
+!IDENTITY.md
+!USER.md
+!TOOLS.md
+!HEARTBEAT.md
+!MEMORY.md
 .cache/
 *.gguf
