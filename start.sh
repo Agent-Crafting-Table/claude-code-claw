@@ -17,6 +17,13 @@ if [ ! -f "$WORKSPACE/data/current-model.json" ]; then
   echo '{"model":"sonnet"}' > "$WORKSPACE/data/current-model.json"
 fi
 
+# Wipe stale lock files left by previous container instances. SIGKILL,
+# OOM kills, and unclean restarts can orphan lock files; without this hook
+# any agent that re-acquires the same lock would refuse to start.
+if [ -x "$WORKSPACE/scripts/cleanup-stale-locks.sh" ]; then
+  bash "$WORKSPACE/scripts/cleanup-stale-locks.sh" || true
+fi
+
 # Install npm dependencies if needed
 if [ ! -d "$WORKSPACE/node_modules" ]; then
   echo "[start.sh] Installing npm dependencies..."
