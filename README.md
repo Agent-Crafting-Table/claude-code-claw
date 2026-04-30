@@ -2,6 +2,75 @@
 
 A full-featured starter kit for running a personal AI ops agent powered by **Claude Code CLI** inside Docker. Includes Discord integration, a cron scheduler, persistent memory, and a self-healing restart loop — everything you need to go from zero to a running agent in under an hour.
 
+## How It Works
+
+```mermaid
+flowchart TD
+    subgraph Docker Container
+        A[start.sh entrypoint] --> B[tmux session created]
+        B --> C[claude:0
+Main agent session]
+        B --> D[claude:cron
+cron-runner.js]
+        B --> E[claude:slash
+discord-slash-handler.js]
+
+        C --> F[restart-loop.sh
+auto-restarts on exit]
+        F --> G[Read data/current-model.json
+load model on each start]
+        G --> H[claude --model sonnet
+Claude Code session]
+
+        D --> I[crons/jobs.json
+schedule definitions]
+        I -->|cron fires| J[Natural language prompt
+sent to Claude]
+        J --> H
+    end
+
+    H --> K[MCP Plugin
+fleet-discord / discord-streaming]
+    K <--> L[Discord Server]
+
+    subgraph "Identity Layer"
+        M[SOUL.md] --> H
+        N[IDENTITY.md] --> H
+        O[USER.md] --> H
+        P[MEMORY.md] --> H
+        Q[HEARTBEAT.md] --> H
+    end
+```
+
+```mermaid
+flowchart LR
+    subgraph "Memory System"
+        MA[MEMORY.md
+40-line index] --> REF[memory/references/
+topic files]
+        AT[memory/active-threads.md
+in-flight tasks]
+        DN["memory/YYYY-MM-DD.md
+daily notes"]
+    end
+
+    subgraph "Session Flow"
+        INIT[Claude Code starts] --> READ[Read CLAUDE.md / AGENTS.md]
+        READ --> CHECK[Check HEARTBEAT.md
+proactive tasks]
+        CHECK --> READY[Ready for Discord messages
+and cron jobs]
+    end
+
+    subgraph "Discord Commands"
+        CMD1["/status — health check"]
+        CMD2["/model [name] — show or switch model"]
+        CMD3["/herc message — arbitrary prompt"]
+        CMD4["/cron list — show jobs"]
+        CMD5["/cron run id — manual trigger"]
+    end
+```
+
 ## What you get
 
 - **Always-on Claude Code session** — runs in Docker via tmux, auto-restarts on exit
